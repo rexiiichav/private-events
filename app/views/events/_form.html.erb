@@ -1,0 +1,13 @@
+<%= form_with(model: @event) do |f|%>
+    <div class="form-group">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label :date %><br />
+      <%= f.date_field :date, autofocus: true, autocomplete: "date", class: 'form-control'%>
+    </div>
+    <div class="form-group row justify-content-center">
+      <%= f.submit 'Submit', class:'btn btn-outline-light btn-lg'%>
+    </div>
+<% end %>

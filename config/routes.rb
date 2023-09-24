@@ -4,4 +4,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  root "events#index"
+  resources :events do
+    member do
+      get 'rsvp'
+      get 'cancel_rsvp'
+      post 'invite'
+    end
+  end
+  resource :user
 end

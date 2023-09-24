@@ -1,0 +1,29 @@
+<h1>Events from <%=@user.email%></h1>
+
+<ul>
+  <% @user.created_events.each do |event| %>
+    <li>
+      <%= link_to event.name, event %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Upcoming Events Attending:</h2>
+
+<ul>
+  <% @user.attended_events.future.each do |event| %>
+    <li>
+      <%= link_to event.name, event %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Attended Events:</h2>
+
+<ul>
+  <% @user.attended_events.past.each do |event| %>
+    <li>
+      <%= link_to event.name, event %>
+    </li>
+  <% end %>
+</ul>

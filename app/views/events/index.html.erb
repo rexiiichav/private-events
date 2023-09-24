@@ -1,10 +1,24 @@
 <h1>Events</h1>
 
+<h2>Future Events:</h2>
 <ul>
-  <% @events.each do |event| %>
+  <% @events.future.each do |event| %>
+  <%if event.invitees.include?(current_user) || event.creator == current_user%>
     <li>
       <%= link_to event.name, event %>
     </li>
+  <% end %>
+  <% end %>
+</ul>
+
+<h2>Past Events:</h2>
+<ul>
+  <% @events.past.each do |event| %>
+   <%if event.invitees.include?(current_user) || event.creator == current_user%>
+    <li>
+      <%= link_to event.name, event %>
+    </li>
+  <% end %>
   <% end %>
 </ul>
 

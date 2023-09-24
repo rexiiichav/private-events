@@ -1,0 +1,33 @@
+<h1><%= @event.name %></h1>
+
+<p><%= @event.date %></p>
+
+<h2>Event Attendees:</h2>
+<ul>
+  <% @event.attendees.each do |attendee| %>
+    <li>
+      <%=attendee.email%>
+    </li>
+  <% end %>
+</ul>
+
+<% if current_user == @event.creator %>
+      <%= link_to 'Edit', edit_event_path, class: "btn btn-outline-secondary" %>
+      <%= button_to 'Delete', event_path, method: :delete, class: "btn btn-outline-secondary",
+                            data: { confirm: "Delete this event?"} %>
+    <%= form_with(url: invite_event_path) do |f|%>
+    <div class="form-group">
+      <p>Invite Someone:</p>
+      <%= f.label :email %><br />
+      <%= f.text_field :email, autofocus: true, autocomplete: "email", class: 'form-control'%>
+    </div>
+    <div class="form-group row justify-content-center">
+      <%= f.submit 'Submit', class:'btn btn-outline-light btn-lg'%>
+    </div>
+    <% end %>
+    <% elsif @event.attendees.include?(current_user) %>
+      <%= link_to 'Cancel RSVP', cancel_rsvp_event_path, class: "btn btn-outline-secondary" %>
+    <% else %>
+      <%= link_to 'RSVP', rsvp_event_path, class: "btn btn-primary" unless @event.date < Time.now %>
+<% end %>
+
